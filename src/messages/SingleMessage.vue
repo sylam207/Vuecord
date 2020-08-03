@@ -1,0 +1,53 @@
+<template>
+    <div>
+       <div class = "mt-3 mb-5">
+           <div v-for = "(message, idx) in messages" :key = "idx">
+               <div class = "media">
+                   <img :src = "message.user.avatar" height = "50" class = "img rounded-circle mr-2">
+                   <div class = "media-body">
+                       <h6 class = "mt-0">
+                           <a href = "#">{{message.user.name}}</a> - {{message.timestamp | fromNow}}
+                       </h6>
+                       <p :class = "{'self_message': selfMessage(message.user)}">{{ message.content }}</p>
+                   </div>
+             </div>
+           </div>
+       </div>
+
+    </div>
+</template>
+
+<script>
+import moment from 'moment'
+import {mapGetters} from 'vuex'
+
+export default {
+    name: 'single-message',
+    props: ['messages'],
+
+    computed: {
+        ...mapGetters(['currentUser'])
+    },
+
+
+    methods: {
+        selfMessage(user) {
+            return user.id === this.currentUser.uid
+        }
+    },
+
+    filters: {
+        fromNow(value) {
+            return moment(value).fromNow()
+        }
+    }
+}
+
+</script>
+
+<style scoped>
+    .self_message {
+        border-left: 5px solid blue;
+        padding: 0 10px;
+    }
+</style>
