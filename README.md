@@ -1,6 +1,6 @@
-# vuecord
+# Vuecord
 
-> A Vue.js project
+> Chat application using Vue.js and Firebase. Features include private messaging, display user visibility, uploading files.
 
 ## Build Setup
 
